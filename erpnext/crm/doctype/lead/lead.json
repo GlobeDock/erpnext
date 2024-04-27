@@ -10,22 +10,21 @@
  "email_append_to": 1,
  "engine": "InnoDB",
  "field_order": [
-  "naming_series",
+  "lead_details_tab",
   "salutation",
   "first_name",
   "middle_name",
   "last_name",
-  "column_break_1",
-  "lead_name",
-  "job_title",
-  "gender",
+  "column_break_vfpr",
+  "student_id",
   "source",
-  "col_break123",
-  "lead_owner",
+  "column_break_urak",
+  "gender",
+  "date_of_birth",
+  "column_break_fjmi",
   "status",
-  "customer",
-  "type",
-  "request_type",
+  "student_priority",
+  "lead_owner",
   "contact_info_tab",
   "email_id",
   "website",
@@ -35,16 +34,6 @@
   "column_break_16",
   "phone",
   "phone_ext",
-  "organization_section",
-  "company_name",
-  "no_of_employees",
-  "column_break_28",
-  "annual_revenue",
-  "industry",
-  "market_segment",
-  "column_break_31",
-  "territory",
-  "fax",
   "address_section",
   "address_html",
   "column_break_38",
@@ -55,9 +44,30 @@
   "contact_html",
   "qualification_tab",
   "qualification_status",
+  "in_process_reason",
+  "disqualification_reason",
   "column_break_64",
   "qualified_by",
   "qualified_on",
+  "details_tab",
+  "naming_series",
+  "column_break_1",
+  "lead_name",
+  "job_title",
+  "col_break123",
+  "customer",
+  "type",
+  "request_type",
+  "organization_section",
+  "company_name",
+  "no_of_employees",
+  "column_break_28",
+  "annual_revenue",
+  "industry",
+  "market_segment",
+  "column_break_31",
+  "territory",
+  "fax",
   "other_info_tab",
   "campaign_name",
   "company",
@@ -125,13 +135,13 @@
    "width": "50%"
   },
   {
-   "default": "__user",
    "fieldname": "lead_owner",
    "fieldtype": "Link",
    "label": "Lead Owner",
    "oldfieldname": "lead_owner",
    "oldfieldtype": "Link",
    "options": "User",
+   "read_only": 1,
    "search_index": 1
   },
   {
@@ -151,6 +161,7 @@
   {
    "fieldname": "salutation",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Salutation",
    "options": "Salutation"
   },
@@ -217,7 +228,7 @@
   {
    "fieldname": "phone",
    "fieldtype": "Data",
-   "label": "Phone",
+   "label": "Backup Mobile Number",
    "oldfieldname": "contact_no",
    "oldfieldtype": "Data",
    "options": "Phone"
@@ -281,6 +292,7 @@
   {
    "fieldname": "website",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Website",
    "oldfieldname": "website",
    "oldfieldtype": "Data"
@@ -323,20 +335,26 @@
    "options": "Language"
   },
   {
+   "fetch_from": "student_id.first_name",
+   "fetch_if_empty": 1,
    "fieldname": "first_name",
    "fieldtype": "Data",
    "label": "First Name",
    "mandatory_depends_on": "eval: !(doc.company_name)"
   },
   {
+   "fetch_from": "student_id.middle_name",
+   "fetch_if_empty": 1,
    "fieldname": "middle_name",
    "fieldtype": "Data",
-   "label": "Middle Name"
+   "label": "Father's Name"
   },
   {
+   "fetch_from": "student_id.last_name",
+   "fetch_if_empty": 1,
    "fieldname": "last_name",
    "fieldtype": "Data",
-   "label": "Last Name"
+   "label": "Grandfather's Name"
   },
   {
    "fieldname": "no_of_employees",
@@ -351,6 +369,7 @@
   {
    "fieldname": "whatsapp_no",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "WhatsApp",
    "options": "Phone"
   },
@@ -365,10 +384,10 @@
   {
    "fieldname": "phone_ext",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Phone Ext."
   },
   {
-   "collapsible": 1,
    "fieldname": "qualification_tab",
    "fieldtype": "Section Break",
    "label": "Qualification"
@@ -393,18 +412,20 @@
    "fieldname": "qualified_by",
    "fieldtype": "Link",
    "label": "Qualified By",
-   "options": "User"
+   "options": "User",
+   "read_only": 1
   },
   {
    "fieldname": "qualified_on",
    "fieldtype": "Date",
-   "label": "Qualified on"
+   "label": "Qualified on",
+   "read_only": 1
   },
   {
    "fieldname": "qualification_status",
    "fieldtype": "Select",
    "label": "Qualification Status",
-   "options": "Unqualified\nIn Process\nQualified"
+   "options": "\nUnqualified\nIn Process\nQualified"
   },
   {
    "collapsible": 1,
@@ -441,6 +462,7 @@
   {
    "fieldname": "organization_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Organization"
   },
   {
@@ -510,13 +532,71 @@
    "fieldtype": "Tab Break",
    "label": "Connections",
    "show_dashboard": 1
+  },
+  {
+   "fieldname": "lead_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Lead Details"
+  },
+  {
+   "fieldname": "column_break_vfpr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_urak",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "column_break_fjmi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "student_priority",
+   "fieldtype": "Select",
+   "label": "Lead Priority",
+   "options": "\nHigh Intent\nMedium Intent\nLow Intent\nVIP"
+  },
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "hidden": 1,
+   "label": "Details"
+  },
+  {
+   "fieldname": "student_id",
+   "fieldtype": "Link",
+   "label": "Student",
+   "options": "Student",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "depends_on": "eval:doc.qualification_status === \"In Process\"",
+   "fieldname": "in_process_reason",
+   "fieldtype": "Select",
+   "label": "In Process Reason",
+   "mandatory_depends_on": "eval:doc.qualification_status === 'In Process'",
+   "options": "\nPending Financial Confirmation\nPending Family Confirmation\nFuture Aspirant"
+  },
+  {
+   "depends_on": "eval:doc.qualification_status === 'Unqualified'",
+   "fieldname": "disqualification_reason",
+   "fieldtype": "Select",
+   "label": "Disqualification Reason",
+   "mandatory_depends_on": "eval:doc.qualification_status === 'Unqualified'",
+   "options": "\nDid Not Meet Academic Requirements\nInsufficient Budget\nLack of Required Documentation\nAge"
   }
  ],
  "icon": "fa fa-user",
  "idx": 5,
  "image_field": "image",
  "links": [],
- "modified": "2023-12-01 18:46:49.468526",
+ "modified": "2024-04-25 14:22:15.302613",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",

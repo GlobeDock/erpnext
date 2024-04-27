@@ -115,6 +115,7 @@
    "oldfieldtype": "Select",
    "options": "DocType",
    "print_hide": 1,
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -127,6 +128,7 @@
    "oldfieldtype": "Link",
    "options": "opportunity_from",
    "print_hide": 1,
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -209,7 +211,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Prospecting",
+   "default": "Initial Engagement",
    "fieldname": "sales_stage",
    "fieldtype": "Link",
    "label": "Sales Stage",
@@ -622,7 +624,7 @@
  "icon": "fa fa-info-sign",
  "idx": 195,
  "links": [],
- "modified": "2022-10-13 12:42:21.545636",
+ "modified": "2024-04-25 17:37:06.508510",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Opportunity",

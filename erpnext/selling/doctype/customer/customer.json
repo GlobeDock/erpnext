@@ -23,6 +23,7 @@
   "opportunity_name",
   "account_manager",
   "image",
+  "status",
   "defaults_tab",
   "default_currency",
   "default_bank_account",
@@ -570,6 +571,13 @@
   {
    "fieldname": "column_break_nwor",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nService Completed\nMaintaining Relationship\nRenewed\nDormant\nClosed"
   }
  ],
  "icon": "fa fa-user",
@@ -583,7 +591,7 @@
    "link_fieldname": "party"
   }
  ],
- "modified": "2024-03-16 19:41:47.971815",
+ "modified": "2024-04-23 18:05:02.353141",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Customer",

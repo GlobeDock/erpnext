@@ -11,6 +11,9 @@ erpnext.LeadController = class LeadController extends frappe.ui.form.Controller 
 			Quotation: this.make_quotation,
 			Opportunity: this.make_opportunity,
 		};
+		console.log (this.frm)
+
+
 
 		// For avoiding integration issues.
 		this.frm.set_df_property("first_name", "reqd", true);
@@ -27,6 +30,10 @@ erpnext.LeadController = class LeadController extends frappe.ui.form.Controller 
 		let doc = this.frm.doc;
 		erpnext.toggle_naming_series();
 
+		if (!this.frm.is_new() && !doc.student_id ){ 
+			this.frm.add_custom_button(__("Student"), this.make_student, __("Create"));
+		}
+		
 		if (!this.frm.is_new() && doc.__onload && !doc.__onload.is_customer) {
 			this.frm.add_custom_button(__("Customer"), this.make_customer, __("Create"));
 			this.frm.add_custom_button(
@@ -89,6 +96,13 @@ erpnext.LeadController = class LeadController extends frappe.ui.form.Controller 
 	make_customer() {
 		frappe.model.open_mapped_doc({
 			method: "erpnext.crm.doctype.lead.lead.make_customer",
+			frm: cur_frm,
+		});
+	}
+
+	make_student() {
+		frappe.model.open_mapped_doc({
+			method: "erpnext.crm.doctype.lead.lead.make_student",
 			frm: cur_frm,
 		});
 	}
@@ -235,5 +249,5 @@ frappe.ui.form.on("Lead", {
 				frm: frm,
 			});
 		}
-	},
+	}
 });

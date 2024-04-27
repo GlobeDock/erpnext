@@ -7,6 +7,7 @@ from frappe.contacts.address_and_contact import (
 	delete_contact_and_address,
 	load_address_and_contact,
 )
+from frappe import _, msgprint, qb
 from frappe.email.inbox import link_communication_to_document
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import comma_and, get_link_to_form, has_gravatar, validate_email_address
@@ -24,9 +25,8 @@ class Lead(SellingController, CRMNote):
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
-		from frappe.types import DF
-
 		from erpnext.crm.doctype.crm_note.crm_note import CRMNote
+		from frappe.types import DF
 
 		annual_revenue: DF.Currency
 		blog_subscriber: DF.Check
@@ -36,12 +36,15 @@ class Lead(SellingController, CRMNote):
 		company_name: DF.Data | None
 		country: DF.Link | None
 		customer: DF.Link | None
+		date_of_birth: DF.Date | None
 		disabled: DF.Check
+		disqualification_reason: DF.Literal["", "Did Not Meet Academic Requirements", "Insufficient Budget", "Lack of Required Documentation", "Age"]
 		email_id: DF.Data | None
 		fax: DF.Data | None
 		first_name: DF.Data | None
 		gender: DF.Link | None
 		image: DF.AttachImage | None
+		in_process_reason: DF.Literal["", "Pending Financial Confirmation", "Pending Family Confirmation", "Future Aspirant"]
 		industry: DF.Link | None
 		job_title: DF.Data | None
 		language: DF.Link | None
@@ -56,24 +59,16 @@ class Lead(SellingController, CRMNote):
 		notes: DF.Table[CRMNote]
 		phone: DF.Data | None
 		phone_ext: DF.Data | None
-		qualification_status: DF.Literal["Unqualified", "In Process", "Qualified"]
+		qualification_status: DF.Literal["", "Unqualified", "In Process", "Qualified"]
 		qualified_by: DF.Link | None
 		qualified_on: DF.Date | None
 		request_type: DF.Literal["", "Product Enquiry", "Request for Information", "Suggestions", "Other"]
 		salutation: DF.Link | None
 		source: DF.Link | None
 		state: DF.Data | None
-		status: DF.Literal[
-			"Lead",
-			"Open",
-			"Replied",
-			"Opportunity",
-			"Quotation",
-			"Lost Quotation",
-			"Interested",
-			"Converted",
-			"Do Not Contact",
-		]
+		status: DF.Literal["Lead", "Open", "Replied", "Opportunity", "Quotation", "Lost Quotation", "Interested", "Converted", "Do Not Contact"]
+		student_id: DF.Link | None
+		student_priority: DF.Literal["", "High Intent", "Medium Intent", "Low Intent", "VIP"]
 		territory: DF.Link | None
 		title: DF.Data | None
 		type: DF.Literal["", "Client", "Channel Partner", "Consultant"]
@@ -87,6 +82,41 @@ class Lead(SellingController, CRMNote):
 		self.get("__onload").is_customer = customer
 		load_address_and_contact(self)
 		self.set_onload("linked_prospects", self.get_linked_prospects())
+
+	def create_primary_contact(self):
+		self.contact_doc = None
+		contact = frappe.db.get_value(
+			"Dynamic Link",
+			{"link_doctype": "Lead", "parenttype": "Contact", "link_name": self.name},
+			"parent",
+		)
+		if contact:
+			self.contact_doc = frappe.get_doc("Contact", contact)
+			print (self.contact_doc)
+			if self.email_id and not self.contact_doc.email_ids: 
+				print ('contact added')
+				self.contact_doc.add_email(self.email_id, is_primary=True)
+			if self.mobile_no and not self.contact_doc.phone_nos:
+				print ('contact added')
+				self.contact_doc.add_phone(self.mobile_no, is_primary_mobile_no=True)
+			self.contact_doc.save()
+		else:
+			if self.mobile_no or self.email_id:
+				print ("successful function call")
+				contact_temp = make_contact(self)
+				self.db_set("lead_primary_contact", contact_temp.name)
+				self.db_set("mobile_no", self.mobile_no)
+				self.db_set("email_id", self.email_id)
+	
+	def fill_qualification_fields (self):
+		old_doc = self.get_doc_before_save()
+		if old_doc:
+			if self.qualification_status != "Qualified":
+				self.qualified_on = None
+				self.qualified_by = ""
+			elif self.qualification_status != old_doc.qualification_status and self.qualification_status == "Qualified":
+				self.qualified_by = frappe.session.user
+				self.qualified_on = frappe.utils.nowdate()			
 
 	def validate(self):
 		self.set_full_name()
@@ -116,9 +146,13 @@ class Lead(SellingController, CRMNote):
 
 	def after_insert(self):
 		self.link_to_contact()
+		
 
 	def on_update(self):
 		self.update_prospect()
+		# self.create_primary_contact()
+		self.fill_qualification_fields()
+		
 
 	def on_trash(self):
 		frappe.db.set_value("Issue", {"lead": self.name}, "lead", None)
@@ -378,6 +412,27 @@ def make_opportunity(source_name, target_doc=None):
 
 	return target_doc
 
+@frappe.whitelist()
+def make_student (source_name, target_doc=None):
+	def set_missing_values(source, target):
+		_set_missing_values(source, target)
+	target_doc = get_mapped_doc(
+		"Lead",
+		source_name,
+		{
+			"Lead": {
+				"doctype": "Student",
+				"field_map": {
+				},
+			}
+		},
+		target_doc,
+		set_missing_values,
+	)
+
+	return target_doc
+	
+
 
 @frappe.whitelist()
 def make_quotation(source_name, target_doc=None):
@@ -538,3 +593,110 @@ def add_lead_to_prospect(lead, prospect):
 		title=_("Lead -> Prospect"),
 		indicator="green",
 	)
+
+def make_contact(args, is_primary_contact=1):
+	values = {
+		"doctype": "Contact",
+		"is_primary_contact": is_primary_contact,
+		"links": [{"link_doctype": args.get("doctype"), "link_name": args.get("name")}],
+	}
+
+	values.update(
+		{
+			"first_name": args.get("first_name"),
+			"middle_name": args.get("middle_name"),
+			"last_name": args.get("last_name"),
+		}
+	)
+
+
+	contact = frappe.get_doc(values)
+
+	if args.get("email_id"):
+		contact.add_email(args.get("email_id"), is_primary=True)
+	if args.get("mobile_no"):
+		contact.add_phone(args.get("mobile_no"), is_primary_mobile_no=True)
+
+	if flags := args.get("flags"):
+		contact.insert(ignore_permissions=flags.get("ignore_permissions"))
+	else:
+		contact.insert()
+
+	return contact
+
+def parse_full_name(full_name: str) -> tuple[str, str | None, str | None]:
+	"""Parse full name into first name, middle name and last name"""
+	names = full_name.split()
+	first_name = names[0]
+	middle_name = " ".join(names[1:-1]) if len(names) > 2 else None
+	last_name = names[-1] if len(names) > 1 else None
+
+	return first_name, middle_name, last_name
+
+@frappe.whitelist(allow_guest=True)
+def get_users_for_sdr_role ():
+	con = qb.Table ("tabHas Role")
+	users =  frappe.db.sql("""
+		select u.name
+		from tabUser u, `tabHas Role` r
+		where u.name = r.parent and r.role = 'Sales Development Representative' 
+		and u.enabled = 1
+	""")
+	users_list = []
+	for user in users:
+		users_list.append (user[0])
+	return users_list
+
+import datetime
+from frappe.utils import now
+
+@frappe.whitelist(allow_guest=True)
+def get_due_date( current_time):
+    # Define working hours (adjust as needed)
+	working_hours_start = 9  # 9:00 AM
+	working_hours_end = 17  # 5:00 PM
+	working_hours_end_datetime = datetime.datetime (current_time.year, current_time.month, current_time.day, 17, 0,0)
+	due_date = current_time.replace(second=0, microsecond=0)
+	
+	if (current_time + datetime.timedelta(hours=1)) >= working_hours_end_datetime:
+		due_date += datetime.timedelta(days=1)
+		due_date = due_date.replace(hour=working_hours_start + 1)
+		due_date = due_date.replace(minute=0, second=0, microsecond=0)
+	else:
+		due_date = due_date + datetime.timedelta(hours=1)
+
+	return due_date
+
+def create_discovery_engagement_todo (lead):
+	todo = frappe.get_doc({
+		"doctype" : "ToDo",
+		"allocated_to": lead.lead_owner,
+		"reference_type": "Lead",
+		"reference_name": lead.name
+	})
+	todo.date = get_due_date(datetime.datetime.now())
+	todo.description = "Descovery Engagement for " + lead.name
+	todo.insert()
+
+
+def update_lead_owner (todo, event):
+	if (todo.reference_type == "Lead" and "Lead Assignment " in todo.description):
+		lead = frappe.get_doc ("Lead", todo.reference_name)
+		if  lead.lead_owner != todo.allocated_to and (not lead.lead_owner):
+			lead.lead_owner = todo.allocated_to
+			lead.status = "Open"
+			lead.save()
+			create_discovery_engagement_todo (lead)
+		todo_doc = frappe.get_doc ("ToDo", todo.name)
+		todo_doc.delete()
+
+		
+		
+			
+
+
+
+
+
+
+
