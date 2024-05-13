@@ -69,6 +69,7 @@ class Customer(TransactionBase):
 		mobile_no: DF.ReadOnly | None
 		naming_series: DF.Literal["CUST-.YYYY.-"]
 		opportunity_name: DF.Link | None
+		partner_id: DF.Link | None
 		payment_terms: DF.Link | None
 		portal_users: DF.Table[PortalUser]
 		primary_address: DF.Text | None
@@ -77,6 +78,7 @@ class Customer(TransactionBase):
 		salutation: DF.Link | None
 		so_required: DF.Check
 		status: DF.Literal["Active", "Service Completed", "Maintaining Relationship", "Renewed", "Dormant", "Closed"]
+		student_id: DF.Link | None
 		tax_category: DF.Link | None
 		tax_id: DF.Data | None
 		tax_withholding_category: DF.Link | None

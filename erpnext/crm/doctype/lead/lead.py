@@ -83,41 +83,6 @@ class Lead(SellingController, CRMNote):
 		load_address_and_contact(self)
 		self.set_onload("linked_prospects", self.get_linked_prospects())
 
-	def create_primary_contact(self):
-		self.contact_doc = None
-		contact = frappe.db.get_value(
-			"Dynamic Link",
-			{"link_doctype": "Lead", "parenttype": "Contact", "link_name": self.name},
-			"parent",
-		)
-		if contact:
-			self.contact_doc = frappe.get_doc("Contact", contact)
-			print (self.contact_doc)
-			if self.email_id and not self.contact_doc.email_ids: 
-				print ('contact added')
-				self.contact_doc.add_email(self.email_id, is_primary=True)
-			if self.mobile_no and not self.contact_doc.phone_nos:
-				print ('contact added')
-				self.contact_doc.add_phone(self.mobile_no, is_primary_mobile_no=True)
-			self.contact_doc.save()
-		else:
-			if self.mobile_no or self.email_id:
-				print ("successful function call")
-				contact_temp = make_contact(self)
-				self.db_set("lead_primary_contact", contact_temp.name)
-				self.db_set("mobile_no", self.mobile_no)
-				self.db_set("email_id", self.email_id)
-	
-	def fill_qualification_fields (self):
-		old_doc = self.get_doc_before_save()
-		if old_doc:
-			if self.qualification_status != "Qualified":
-				self.qualified_on = None
-				self.qualified_by = ""
-			elif self.qualification_status != old_doc.qualification_status and self.qualification_status == "Qualified":
-				self.qualified_by = frappe.session.user
-				self.qualified_on = frappe.utils.nowdate()			
-
 	def validate(self):
 		self.set_full_name()
 		self.set_lead_name()
@@ -145,15 +110,11 @@ class Lead(SellingController, CRMNote):
 			self.first_name, self.middle_name, self.last_name = parse_full_name(self.lead_name)
 
 	def after_insert(self):
-		self.link_to_contact()
-		
+		self.link_to_contact()	
 
 	def on_update(self):
 		self.update_prospect()
-		# self.create_primary_contact()
-		self.fill_qualification_fields()
-		
-
+	
 	def on_trash(self):
 		frappe.db.set_value("Issue", {"lead": self.name}, "lead", None)
 		delete_contact_and_address(self.doctype, self.name)
@@ -401,38 +362,16 @@ def make_opportunity(source_name, target_doc=None):
 					"company_name": "customer_name",
 					"email_id": "contact_email",
 					"mobile_no": "contact_mobile",
-					"lead_owner": "opportunity_owner",
+					# "lead_owner": "opportunity_owner",
 					"notes": "notes",
+					"student_id": "student_id"
 				},
 			}
 		},
 		target_doc,
 		set_missing_values,
 	)
-
 	return target_doc
-
-@frappe.whitelist()
-def make_student (source_name, target_doc=None):
-	def set_missing_values(source, target):
-		_set_missing_values(source, target)
-	target_doc = get_mapped_doc(
-		"Lead",
-		source_name,
-		{
-			"Lead": {
-				"doctype": "Student",
-				"field_map": {
-				},
-			}
-		},
-		target_doc,
-		set_missing_values,
-	)
-
-	return target_doc
-	
-
 
 @frappe.whitelist()
 def make_quotation(source_name, target_doc=None):
@@ -632,71 +571,3 @@ def parse_full_name(full_name: str) -> tuple[str, str | None, str | None]:
 	last_name = names[-1] if len(names) > 1 else None
 
 	return first_name, middle_name, last_name
-
-@frappe.whitelist(allow_guest=True)
-def get_users_for_sdr_role ():
-	con = qb.Table ("tabHas Role")
-	users =  frappe.db.sql("""
-		select u.name
-		from tabUser u, `tabHas Role` r
-		where u.name = r.parent and r.role = 'Sales Development Representative' 
-		and u.enabled = 1
-	""")
-	users_list = []
-	for user in users:
-		users_list.append (user[0])
-	return users_list
-
-import datetime
-from frappe.utils import now
-
-@frappe.whitelist(allow_guest=True)
-def get_due_date( current_time):
-    # Define working hours (adjust as needed)
-	working_hours_start = 9  # 9:00 AM
-	working_hours_end = 17  # 5:00 PM
-	working_hours_end_datetime = datetime.datetime (current_time.year, current_time.month, current_time.day, 17, 0,0)
-	due_date = current_time.replace(second=0, microsecond=0)
-	
-	if (current_time + datetime.timedelta(hours=1)) >= working_hours_end_datetime:
-		due_date += datetime.timedelta(days=1)
-		due_date = due_date.replace(hour=working_hours_start + 1)
-		due_date = due_date.replace(minute=0, second=0, microsecond=0)
-	else:
-		due_date = due_date + datetime.timedelta(hours=1)
-
-	return due_date
-
-def create_discovery_engagement_todo (lead):
-	todo = frappe.get_doc({
-		"doctype" : "ToDo",
-		"allocated_to": lead.lead_owner,
-		"reference_type": "Lead",
-		"reference_name": lead.name
-	})
-	todo.date = get_due_date(datetime.datetime.now())
-	todo.description = "Descovery Engagement for " + lead.name
-	todo.insert()
-
-
-def update_lead_owner (todo, event):
-	if (todo.reference_type == "Lead" and "Lead Assignment " in todo.description):
-		lead = frappe.get_doc ("Lead", todo.reference_name)
-		if  lead.lead_owner != todo.allocated_to and (not lead.lead_owner):
-			lead.lead_owner = todo.allocated_to
-			lead.status = "Open"
-			lead.save()
-			create_discovery_engagement_todo (lead)
-		todo_doc = frappe.get_doc ("ToDo", todo.name)
-		todo_doc.delete()
-
-		
-		
-			
-
-
-
-
-
-
-

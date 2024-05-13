@@ -16,6 +16,8 @@
   "customer_name",
   "customer_type",
   "customer_group",
+  "student_id",
+  "partner_id",
   "column_break0",
   "territory",
   "gender",
@@ -578,6 +580,18 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Active\nService Completed\nMaintaining Relationship\nRenewed\nDormant\nClosed"
+  },
+  {
+   "fieldname": "student_id",
+   "fieldtype": "Link",
+   "label": "Student",
+   "options": "Student"
+  },
+  {
+   "fieldname": "partner_id",
+   "fieldtype": "Link",
+   "label": "Partner",
+   "options": "Partner"
   }
  ],
  "icon": "fa fa-user",
@@ -591,7 +605,7 @@
    "link_fieldname": "party"
   }
  ],
- "modified": "2024-04-23 18:05:02.353141",
+ "modified": "2024-05-12 21:45:17.744637",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Customer",

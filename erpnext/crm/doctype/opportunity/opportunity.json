@@ -21,6 +21,7 @@
   "opportunity_type",
   "source",
   "opportunity_owner",
+  "student_id",
   "column_break_10",
   "sales_stage",
   "expected_closing",
@@ -173,7 +174,7 @@
    "no_copy": 1,
    "oldfieldname": "status",
    "oldfieldtype": "Select",
-   "options": "Open\nQuotation\nConverted\nLost\nReplied\nClosed",
+   "options": "Open\nOnboarding Completed\nConverted\nLost\nReplied\nClosed",
    "print_hide": 1,
    "reqd": 1
   },
@@ -192,6 +193,7 @@
   {
    "fieldname": "section_break_14",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Opportunity Value"
   },
   {
@@ -459,6 +461,7 @@
   {
    "fieldname": "organization_details_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Organization"
   },
   {
@@ -515,6 +518,7 @@
   {
    "fieldname": "whatsapp",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "WhatsApp",
    "options": "Phone"
   },
@@ -527,6 +531,7 @@
   {
    "fieldname": "phone_ext",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Phone Ext."
   },
   {
@@ -569,6 +574,7 @@
   {
    "fieldname": "job_title",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Job Title"
   },
   {
@@ -619,12 +625,19 @@
    "fieldtype": "Link",
    "label": "Country",
    "options": "Country"
+  },
+  {
+   "fieldname": "student_id",
+   "fieldtype": "Link",
+   "label": "Student",
+   "options": "Student",
+   "search_index": 1
   }
  ],
  "icon": "fa fa-info-sign",
  "idx": 195,
  "links": [],
- "modified": "2024-04-25 17:37:06.508510",
+ "modified": "2024-05-08 14:06:32.148397",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Opportunity",

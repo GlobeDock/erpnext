@@ -32,6 +32,7 @@ erpnext.LeadController = class LeadController extends frappe.ui.form.Controller 
 
 		if (!this.frm.is_new() && !doc.student_id ){ 
 			this.frm.add_custom_button(__("Student"), this.make_student, __("Create"));
+			this.frm.add_custom_button(__("Tourist"), this.make_tourist, __("Create"));
 		}
 		
 		if (!this.frm.is_new() && doc.__onload && !doc.__onload.is_customer) {
@@ -102,7 +103,13 @@ erpnext.LeadController = class LeadController extends frappe.ui.form.Controller 
 
 	make_student() {
 		frappe.model.open_mapped_doc({
-			method: "erpnext.crm.doctype.lead.lead.make_student",
+			method: "globedock.globecrm.automations.lead_automations.make_student",
+			frm: cur_frm,
+		});
+	}
+	make_tourist() {
+		frappe.model.open_mapped_doc({
+			method: "globedock.globecrm.automations.lead_automations.make_tourist",
 			frm: cur_frm,
 		});
 	}
@@ -166,6 +173,10 @@ erpnext.LeadController = class LeadController extends frappe.ui.form.Controller 
 extend_cscript(cur_frm.cscript, new erpnext.LeadController({ frm: cur_frm }));
 
 frappe.ui.form.on("Lead", {
+	after_save: function (frm) {
+		window.location.reload()
+	},
+
 	make_opportunity: async function (frm) {
 		let existing_prospect = (
 			await frappe.db.get_value(
