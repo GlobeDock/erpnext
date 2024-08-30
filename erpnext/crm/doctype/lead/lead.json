@@ -23,7 +23,6 @@
   "date_of_birth",
   "column_break_fjmi",
   "status",
-  "student_priority",
   "lead_owner",
   "contact_info_tab",
   "email_id",
@@ -154,7 +153,7 @@
    "no_copy": 1,
    "oldfieldname": "status",
    "oldfieldtype": "Select",
-   "options": "Lead\nOpen\nReplied\nOpportunity\nQuotation\nLost Quotation\nInterested\nConverted\nDo Not Contact",
+   "options": "Lead\nOpen\nReplied\nOpportunity\nInterested\nConverted\nDo Not Contact",
    "reqd": 1,
    "search_index": 1
   },
@@ -224,14 +223,6 @@
    "fieldtype": "HTML",
    "label": "Contact HTML",
    "read_only": 1
-  },
-  {
-   "fieldname": "phone",
-   "fieldtype": "Data",
-   "label": "Backup Mobile Number",
-   "oldfieldname": "contact_no",
-   "oldfieldtype": "Data",
-   "options": "Phone"
   },
   {
    "fieldname": "mobile_no",
@@ -556,12 +547,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "student_priority",
-   "fieldtype": "Select",
-   "label": "Lead Priority",
-   "options": "\nHigh Intent\nMedium Intent\nLow Intent\nVIP"
-  },
-  {
    "fieldname": "details_tab",
    "fieldtype": "Tab Break",
    "hidden": 1,
@@ -589,14 +574,22 @@
    "fieldtype": "Select",
    "label": "Disqualification Reason",
    "mandatory_depends_on": "eval:doc.qualification_status === 'Unqualified'",
-   "options": "\nDid Not Meet Academic Requirements\nInsufficient Budget\nLack of Required Documentation\nAge"
+   "options": "\nDid Not Meet Academic Requirements\nInsufficient Budget\nLack of Required Documentation\nAge\nGap Year"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Backup Mobile Number",
+   "oldfieldname": "contact_no",
+   "oldfieldtype": "Data",
+   "options": "Phone"
   }
  ],
  "icon": "fa fa-user",
  "idx": 5,
  "image_field": "image",
  "links": [],
- "modified": "2024-04-25 14:22:15.302613",
+ "modified": "2024-06-19 18:07:13.736230",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",

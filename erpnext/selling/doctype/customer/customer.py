@@ -47,7 +47,7 @@ class Customer(TransactionBase):
 		customer_pos_id: DF.Data | None
 		customer_primary_address: DF.Link | None
 		customer_primary_contact: DF.Link | None
-		customer_type: DF.Literal["Company", "Individual", "Proprietorship", "Partnership"]
+		customer_type: DF.Literal["Student", "School", "Agent", "Loan Provider", "Insurance Provider", "Accommodation Provider", "Study Abroad Agency", "Tourist", "Individual"]
 		default_bank_account: DF.Link | None
 		default_commission_rate: DF.Float
 		default_currency: DF.Link | None
@@ -83,6 +83,7 @@ class Customer(TransactionBase):
 		tax_id: DF.Data | None
 		tax_withholding_category: DF.Link | None
 		territory: DF.Link | None
+		tourist: DF.Link | None
 		website: DF.Data | None
 	# end: auto-generated types
 

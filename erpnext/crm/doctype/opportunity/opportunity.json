@@ -26,6 +26,29 @@
   "sales_stage",
   "expected_closing",
   "probability",
+  "section_break_ztlm",
+  "items",
+  "section_break_32",
+  "base_total",
+  "column_break_33",
+  "total",
+  "primary_contact_section",
+  "contact_person",
+  "job_title",
+  "column_break_54",
+  "contact_email",
+  "contact_mobile",
+  "column_break_22",
+  "whatsapp",
+  "phone",
+  "phone_ext",
+  "address_contact_section",
+  "address_html",
+  "customer_address",
+  "address_display",
+  "column_break3",
+  "contact_html",
+  "contact_display",
   "organization_details_section",
   "no_of_employees",
   "annual_revenue",
@@ -60,30 +83,6 @@
   "order_lost_reason",
   "column_break_56",
   "competitors",
-  "contact_info",
-  "primary_contact_section",
-  "contact_person",
-  "job_title",
-  "column_break_54",
-  "contact_email",
-  "contact_mobile",
-  "column_break_22",
-  "whatsapp",
-  "phone",
-  "phone_ext",
-  "address_contact_section",
-  "address_html",
-  "customer_address",
-  "address_display",
-  "column_break3",
-  "contact_html",
-  "contact_display",
-  "items_section",
-  "items",
-  "section_break_32",
-  "base_total",
-  "column_break_33",
-  "total",
   "activities_tab",
   "open_activities_html",
   "all_activities_section",
@@ -116,7 +115,6 @@
    "oldfieldtype": "Select",
    "options": "DocType",
    "print_hide": 1,
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -129,7 +127,6 @@
    "oldfieldtype": "Link",
    "options": "opportunity_from",
    "print_hide": 1,
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -226,22 +223,10 @@
    "label": "Probability (%)"
   },
   {
-   "fieldname": "items_section",
-   "fieldtype": "Tab Break",
-   "label": "Items",
-   "options": "fa fa-shopping-cart"
-  },
-  {
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
    "options": "Opportunity Item"
-  },
-  {
-   "fieldname": "contact_info",
-   "fieldtype": "Tab Break",
-   "label": "Contacts",
-   "options": "fa fa-bullhorn"
   },
   {
    "depends_on": "eval:doc.party_name",
@@ -558,6 +543,7 @@
    "depends_on": "eval:!doc.__islocal",
    "fieldname": "notes_tab",
    "fieldtype": "Tab Break",
+   "hidden": 1,
    "label": "Comments"
   },
   {
@@ -569,6 +555,7 @@
    "depends_on": "eval:!doc.__islocal",
    "fieldname": "activities_tab",
    "fieldtype": "Tab Break",
+   "hidden": 1,
    "label": "Activities"
   },
   {
@@ -632,12 +619,16 @@
    "label": "Student",
    "options": "Student",
    "search_index": 1
+  },
+  {
+   "fieldname": "section_break_ztlm",
+   "fieldtype": "Section Break"
   }
  ],
  "icon": "fa fa-info-sign",
  "idx": 195,
  "links": [],
- "modified": "2024-05-08 14:06:32.148397",
+ "modified": "2024-08-19 16:29:37.036627",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Opportunity",

@@ -11,6 +11,9 @@
   },
   {
    "card": "Open Opportunity"
+  },
+  {
+   "card": "Total Student Assigned"
   }
  ],
  "charts": [
@@ -47,10 +50,10 @@
  "dashboard_name": "CRM",
  "docstatus": 0,
  "doctype": "Dashboard",
- "idx": 0,
- "is_default": 0,
+ "idx": 5,
+ "is_default": 1,
  "is_standard": 1,
- "modified": "2020-07-21 18:56:47.230053",
+ "modified": "2024-05-27 21:32:38.533816",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "CRM",
