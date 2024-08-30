@@ -38,7 +38,7 @@ class Lead(SellingController, CRMNote):
 		customer: DF.Link | None
 		date_of_birth: DF.Date | None
 		disabled: DF.Check
-		disqualification_reason: DF.Literal["", "Did Not Meet Academic Requirements", "Insufficient Budget", "Lack of Required Documentation", "Age"]
+		disqualification_reason: DF.Literal["", "Did Not Meet Academic Requirements", "Insufficient Budget", "Lack of Required Documentation", "Age", "Gap Year"]
 		email_id: DF.Data | None
 		fax: DF.Data | None
 		first_name: DF.Data | None
@@ -66,9 +66,8 @@ class Lead(SellingController, CRMNote):
 		salutation: DF.Link | None
 		source: DF.Link | None
 		state: DF.Data | None
-		status: DF.Literal["Lead", "Open", "Replied", "Opportunity", "Quotation", "Lost Quotation", "Interested", "Converted", "Do Not Contact"]
+		status: DF.Literal["Lead", "Open", "Replied", "Opportunity", "Interested", "Converted", "Do Not Contact"]
 		student_id: DF.Link | None
-		student_priority: DF.Literal["", "High Intent", "Medium Intent", "Low Intent", "VIP"]
 		territory: DF.Link | None
 		title: DF.Data | None
 		type: DF.Literal["", "Client", "Channel Partner", "Consultant"]

@@ -6,10 +6,10 @@ erpnext.sales_common.setup_selling_controller();
 
 frappe.ui.form.on("Opportunity", {
 	setup: function (frm) {
-		frm.custom_make_buttons = {
-			Quotation: "Quotation",
-			"Supplier Quotation": "Supplier Quotation",
-		};
+		// frm.custom_make_buttons = {
+		// 	Quotation: "Quotation",
+		// 	"Supplier Quotation": "Supplier Quotation",
+		// };
 
 		frm.set_query("opportunity_from", function () {
 			return {
@@ -77,21 +77,21 @@ frappe.ui.form.on("Opportunity", {
 
 		if (!frm.is_new() && doc.status !== "Lost") {
 			if (doc.items) {
-				frm.add_custom_button(
-					__("Supplier Quotation"),
-					function () {
-						frm.trigger("make_supplier_quotation");
-					},
-					__("Create")
-				);
+				// frm.add_custom_button(
+				// 	__("Supplier Quotation"),
+				// 	function () {
+				// 		frm.trigger("make_supplier_quotation");
+				// 	},
+				// 	__("Create")
+				// );
 
-				frm.add_custom_button(
-					__("Request For Quotation"),
-					function () {
-						frm.trigger("make_request_for_quotation");
-					},
-					__("Create")
-				);
+				// frm.add_custom_button(
+				// 	__("Request For Quotation"),
+				// 	function () {
+				// 		frm.trigger("make_request_for_quotation");
+				// 	},
+				// 	__("Create")
+				// );
 			}
 
 			if (frm.doc.opportunity_from != "Customer") {
@@ -104,13 +104,24 @@ frappe.ui.form.on("Opportunity", {
 				);
 			}
 
-			frm.add_custom_button(
-				__("Quotation"),
-				function () {
-					frm.trigger("create_quotation");
-				},
-				__("Create")
-			);
+			// frm.add_custom_button(
+			// 	__("Quotation"),
+			// 	function () {
+			// 		frm.trigger("create_quotation");
+			// 	},
+			// 	__("Create")
+			// );
+			
+
+			if (frm.doc.opportunity_from == 'Customer' && frm.doc.party_name) {
+				frm.add_custom_button(
+					__("Sales Invoice"),
+					function () {
+						frm.trigger("create_sales_invoice");
+					},
+					__("Create")
+				);
+			}
 		}
 
 		if (!frm.doc.__islocal && frm.perm[0].write && frm.doc.docstatus == 0) {
@@ -318,6 +329,12 @@ erpnext.crm.Opportunity = class Opportunity extends frappe.ui.form.Controller {
 	create_quotation() {
 		frappe.model.open_mapped_doc({
 			method: "erpnext.crm.doctype.opportunity.opportunity.make_quotation",
+			frm: cur_frm,
+		});
+	}	
+	create_sales_invoice() {
+		frappe.model.open_mapped_doc({
+			method: "erpnext.crm.doctype.opportunity.sales_modifications.make_sales_invoice",
 			frm: cur_frm,
 		});
 	}

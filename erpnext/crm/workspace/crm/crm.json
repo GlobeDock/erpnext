@@ -1,11 +1,6 @@
 {
- "charts": [
-  {
-   "chart_name": "Territory Wise Sales",
-   "label": "Territory Wise Sales"
-  }
- ],
- "content": "[{\"id\":\"Cj2TyhgiWy\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Territory Wise Sales\",\"col\":12}},{\"id\":\"LAKRmpYMRA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"XGIwEUStw_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"69RN0XsiJK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Lead\",\"col\":3}},{\"id\":\"t6PQ0vY-Iw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Opportunity\",\"col\":3}},{\"id\":\"VOFE0hqXRD\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"0ik53fuemG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Analytics\",\"col\":3}},{\"id\":\"wdROEmB_XG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"id\":\"-I9HhcgUKE\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ttpROKW9vk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"-76QPdbBHy\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales Pipeline\",\"col\":4}},{\"id\":\"_YmGwzVWRr\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"Bma1PxoXk3\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"80viA0R83a\",\"type\":\"card\",\"data\":{\"card_name\":\"Campaign\",\"col\":4}},{\"id\":\"Buo5HtKRFN\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"sLS_x4FMK2\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance\",\"col\":4}}]",
+ "charts": [],
+ "content": "[{\"id\":\"LAKRmpYMRA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"S3S3R9_9cd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Student Assigned\",\"col\":4}},{\"id\":\"AJX8_7T9i8\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>ToDo</b></span>\",\"col\":12}},{\"id\":\"S3HriYgWxT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Todo\",\"col\":3}},{\"id\":\"-iCOebSLfg\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Todo for Today\",\"col\":3}},{\"id\":\"FMVT8jzr4F\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Overdue Todo\",\"col\":3}},{\"id\":\"D1P4nZ2C4n\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Completed Todo\",\"col\":3}},{\"id\":\"ttpROKW9vk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"-76QPdbBHy\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales Pipeline\",\"col\":4}},{\"id\":\"_YmGwzVWRr\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"Bma1PxoXk3\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"80viA0R83a\",\"type\":\"card\",\"data\":{\"card_name\":\"Campaign\",\"col\":4}},{\"id\":\"Buo5HtKRFN\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"sLS_x4FMK2\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance\",\"col\":4}}]",
  "creation": "2020-01-23 14:48:30.183272",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +8,7 @@
  "for_user": "",
  "hide_custom": 0,
  "icon": "crm",
- "idx": 0,
+ "idx": 1,
  "is_hidden": 0,
  "label": "CRM",
  "links": [
@@ -419,7 +414,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-09-14 12:11:03.968048",
+ "modified": "2024-05-25 20:14:11.846154",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "CRM",
@@ -430,39 +425,7 @@
  "quick_lists": [],
  "restrict_to_domain": "",
  "roles": [],
- "sequence_id": 17.0,
- "shortcuts": [
-  {
-   "color": "Blue",
-   "format": "{} Open",
-   "label": "Lead",
-   "link_to": "Lead",
-   "stats_filter": "{\"status\":\"Open\"}",
-   "type": "DocType"
-  },
-  {
-   "color": "Blue",
-   "format": "{} Assigned",
-   "label": "Opportunity",
-   "link_to": "Opportunity",
-   "stats_filter": "{\"_assign\": [\"like\", '%' + frappe.session.user + '%']}",
-   "type": "DocType"
-  },
-  {
-   "label": "Customer",
-   "link_to": "Customer",
-   "type": "DocType"
-  },
-  {
-   "label": "Sales Analytics",
-   "link_to": "Sales Analytics",
-   "type": "Report"
-  },
-  {
-   "label": "Dashboard",
-   "link_to": "CRM",
-   "type": "Dashboard"
-  }
- ],
+ "sequence_id": 26.0,
+ "shortcuts": [],
  "title": "CRM"
 }

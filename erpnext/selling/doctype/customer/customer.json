@@ -18,6 +18,7 @@
   "customer_group",
   "student_id",
   "partner_id",
+  "tourist",
   "column_break0",
   "territory",
   "gender",
@@ -131,13 +132,12 @@
    "options": "Gender"
   },
   {
-   "default": "Company",
    "fieldname": "customer_type",
    "fieldtype": "Select",
    "label": "Customer Type",
    "oldfieldname": "customer_type",
    "oldfieldtype": "Select",
-   "options": "Company\nIndividual\nProprietorship\nPartnership",
+   "options": "Student\nSchool\nAgent\nLoan Provider\nInsurance Provider\nAccommodation Provider\nStudy Abroad Agency\nTourist\nIndividual",
    "reqd": 1
   },
   {
@@ -582,16 +582,28 @@
    "options": "Active\nService Completed\nMaintaining Relationship\nRenewed\nDormant\nClosed"
   },
   {
+   "depends_on": "eval:doc.customer_type === 'Student'",
    "fieldname": "student_id",
    "fieldtype": "Link",
    "label": "Student",
-   "options": "Student"
+   "options": "Student",
+   "search_index": 1
   },
   {
+   "depends_on": "eval:doc.customer_type === 'School'",
    "fieldname": "partner_id",
    "fieldtype": "Link",
    "label": "Partner",
-   "options": "Partner"
+   "options": "Partner",
+   "search_index": 1
+  },
+  {
+   "depends_on": "eval:doc.customer_type === 'Tourist'",
+   "fieldname": "tourist",
+   "fieldtype": "Link",
+   "label": "Tourist",
+   "options": "Tourist",
+   "search_index": 1
   }
  ],
  "icon": "fa fa-user",
@@ -605,7 +617,7 @@
    "link_fieldname": "party"
   }
  ],
- "modified": "2024-05-12 21:45:17.744637",
+ "modified": "2024-06-01 12:19:50.208971",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Customer",
