@@ -137,7 +137,7 @@
    "label": "Customer Type",
    "oldfieldname": "customer_type",
    "oldfieldtype": "Select",
-   "options": "Student\nSchool\nAgent\nLoan Provider\nInsurance Provider\nAccommodation Provider\nStudy Abroad Agency\nTourist\nIndividual",
+   "options": "Student\nSchool\nLoan Provider\nInsurance Provider\nAccommodation Provider\nStudy Abroad Agency\nTourist\nIndividual",
    "reqd": 1
   },
   {
@@ -617,7 +617,7 @@
    "link_fieldname": "party"
   }
  ],
- "modified": "2024-06-01 12:19:50.208971",
+ "modified": "2024-09-25 03:25:57.709739",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Customer",
