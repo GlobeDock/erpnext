@@ -273,6 +273,24 @@ frappe.ui.form.on("Opportunity Item", {
 	rate: function (frm, cdt, cdn) {
 		frm.trigger("calculate", cdt, cdn);
 	},
+	item_code: function (frm, cdt, cdn) {
+		row =  locals[cdt][cdn]
+		if (row.item_code) {
+			frappe.call ({
+				method: "globedock.globecrm.automations.opportunity_automations.get_item_pricing",
+				args: {
+					'item_code': row.item_code
+				},
+				callback: function (r) {
+					console.log (r.message)
+					if (r.message) {
+						row.rate = row.qty * r.message
+						frm.refresh_field ("items")
+					}
+				}
+			})
+		}		
+	}
 });
 
 // TODO commonify this code
