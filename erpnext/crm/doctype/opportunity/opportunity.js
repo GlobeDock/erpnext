@@ -284,7 +284,8 @@ frappe.ui.form.on("Opportunity Item", {
 				callback: function (r) {
 					console.log (r.message)
 					if (r.message) {
-						row.rate = row.qty * r.message
+						row.rate =  r.message
+						row.amount = row.qty * row.rate
 						frm.refresh_field ("items")
 					}
 				}

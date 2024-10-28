@@ -19,6 +19,8 @@
   "posting_time",
   "set_posting_time",
   "due_date",
+  "invoice_number",
+  "invoice_date",
   "column_break_14",
   "is_pos",
   "pos_profile",
@@ -2173,6 +2175,16 @@
    "label": "Update Outstanding for Self",
    "no_copy": 1,
    "print_hide": 1
+  },
+  {
+   "fieldname": "invoice_number",
+   "fieldtype": "Data",
+   "label": "Invoice Number"
+  },
+  {
+   "fieldname": "invoice_date",
+   "fieldtype": "Date",
+   "label": "Invoice Date"
   }
  ],
  "icon": "fa fa-file-text",
@@ -2185,7 +2197,7 @@
    "link_fieldname": "consolidated_invoice"
   }
  ],
- "modified": "2024-03-22 17:50:34.395602",
+ "modified": "2024-10-26 15:46:07.606293",
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "Sales Invoice",
