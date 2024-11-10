@@ -79,7 +79,7 @@ class Opportunity(TransactionBase, CRMNote):
 		sales_stage: DF.Link | None
 		source: DF.Link | None
 		state: DF.Data | None
-		status: DF.Literal["Open", "Onboarding Completed", "Converted", "Lost", "Replied", "Closed"]
+		status: DF.Literal["Open", "Converted", "Lost", "Replied", "Closed"]
 		student_id: DF.Link | None
 		territory: DF.Link | None
 		title: DF.Data | None

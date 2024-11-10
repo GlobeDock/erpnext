@@ -76,6 +76,7 @@ class Customer(TransactionBase):
 		represents_company: DF.Link | None
 		sales_team: DF.Table[SalesTeam]
 		salutation: DF.Link | None
+		school: DF.Link | None
 		so_required: DF.Check
 		status: DF.Literal["Active", "Service Completed", "Maintaining Relationship", "Renewed", "Dormant", "Closed"]
 		student_id: DF.Link | None

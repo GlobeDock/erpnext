@@ -19,6 +19,7 @@
   "student_id",
   "partner_id",
   "tourist",
+  "school",
   "column_break0",
   "territory",
   "gender",
@@ -106,7 +107,7 @@
    "set_only_once": 1
   },
   {
-   "depends_on": "eval:doc.customer_type!='Company'",
+   "depends_on": "eval:doc.customer_type!='Company' && doc.customer_type!='School'",
    "fieldname": "salutation",
    "fieldtype": "Link",
    "label": "Salutation",
@@ -604,6 +605,13 @@
    "label": "Tourist",
    "options": "Tourist",
    "search_index": 1
+  },
+  {
+   "depends_on": "eval:doc.customer_type === 'School'",
+   "fieldname": "school",
+   "fieldtype": "Link",
+   "label": "School",
+   "options": "School"
   }
  ],
  "icon": "fa fa-user",
@@ -617,7 +625,7 @@
    "link_fieldname": "party"
   }
  ],
- "modified": "2024-09-25 03:25:57.709739",
+ "modified": "2024-11-10 16:05:21.692291",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Customer",

@@ -287,10 +287,12 @@ frappe.ui.form.on("Opportunity Item", {
 						row.rate =  r.message
 						row.amount = row.qty * row.rate
 						frm.refresh_field ("items")
+						frm.trigger("calculate", cdt, cdn);
 					}
 				}
 			})
-		}		
+		}
+				
 	}
 });
 

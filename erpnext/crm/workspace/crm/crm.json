@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"LAKRmpYMRA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"S3S3R9_9cd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Student Assigned\",\"col\":4}},{\"id\":\"AJX8_7T9i8\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>ToDo</b></span>\",\"col\":12}},{\"id\":\"S3HriYgWxT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Todo\",\"col\":3}},{\"id\":\"-iCOebSLfg\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Todo for Today\",\"col\":3}},{\"id\":\"FMVT8jzr4F\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Overdue Todo\",\"col\":3}},{\"id\":\"D1P4nZ2C4n\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Completed Todo\",\"col\":3}},{\"id\":\"ttpROKW9vk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"-76QPdbBHy\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales Pipeline\",\"col\":4}},{\"id\":\"_YmGwzVWRr\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"Bma1PxoXk3\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"80viA0R83a\",\"type\":\"card\",\"data\":{\"card_name\":\"Campaign\",\"col\":4}},{\"id\":\"Buo5HtKRFN\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"sLS_x4FMK2\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance\",\"col\":4}}]",
+ "content": "[{\"id\":\"LAKRmpYMRA\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"AJX8_7T9i8\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>ToDo</b></span>\",\"col\":12}},{\"id\":\"ttpROKW9vk\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"-76QPdbBHy\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales Pipeline\",\"col\":4}},{\"id\":\"_YmGwzVWRr\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"Bma1PxoXk3\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"80viA0R83a\",\"type\":\"card\",\"data\":{\"card_name\":\"Campaign\",\"col\":4}},{\"id\":\"Buo5HtKRFN\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"sLS_x4FMK2\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance\",\"col\":4}}]",
  "creation": "2020-01-23 14:48:30.183272",
  "custom_blocks": [],
  "docstatus": 0,
@@ -414,7 +414,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-05-25 20:14:11.846154",
+ "modified": "2024-10-31 14:31:20.727723",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "CRM",
