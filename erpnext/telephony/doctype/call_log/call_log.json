@@ -54,7 +54,6 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
-   "options": "Ringing\nIn Progress\nCompleted\nFailed\nBusy\nNo Answer\nQueued\nCanceled",
    "read_only": 1
   },
   {
@@ -164,7 +163,7 @@
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-04-14 02:59:22.503202",
+ "modified": "2025-01-02 23:14:05.023700",
  "modified_by": "Administrator",
  "module": "Telephony",
  "name": "Call Log",

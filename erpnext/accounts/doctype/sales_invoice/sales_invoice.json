@@ -15,6 +15,8 @@
   "company",
   "company_tax_id",
   "commission_management",
+  "student",
+  "tourist",
   "column_break1",
   "posting_date",
   "posting_time",
@@ -2201,6 +2203,18 @@
    "label": "Commission Management",
    "options": "Commission Management",
    "read_only": 1
+  },
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "label": "Student",
+   "options": "Student"
+  },
+  {
+   "fieldname": "tourist",
+   "fieldtype": "Link",
+   "label": "Tourist",
+   "options": "Tourist"
   }
  ],
  "icon": "fa fa-file-text",
@@ -2213,7 +2227,7 @@
    "link_fieldname": "consolidated_invoice"
   }
  ],
- "modified": "2024-11-10 14:53:41.493853",
+ "modified": "2025-01-01 03:24:24.254340",
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "Sales Invoice",

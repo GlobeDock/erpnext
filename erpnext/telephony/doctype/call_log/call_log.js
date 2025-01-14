@@ -7,7 +7,7 @@ frappe.ui.form.on("Call Log", {
 		const incoming_call = frm.doc.type == "Incoming";
 		frm.add_custom_button(incoming_call ? __("Callback") : __("Call Again"), () => {
 			const number = incoming_call ? frm.doc.from : frm.doc.to;
-			frappe.phone_call.handler(number, frm);
+			triggerCallEvent(number);
 		});
 	},
 	setup_recording_audio_control(frm) {
@@ -24,4 +24,11 @@ frappe.ui.form.on("Call Log", {
 			`);
 		}
 	},
+
 });
+function triggerCallEvent(number) {
+        window.dispatchEvent(new CustomEvent('callEvent', {
+            detail: { number: number }
+        }));
+    }
+

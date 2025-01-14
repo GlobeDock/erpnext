@@ -8,7 +8,7 @@
  "for_user": "",
  "hide_custom": 0,
  "icon": "crm",
- "idx": 1,
+ "idx": 2,
  "is_hidden": 0,
  "label": "CRM",
  "links": [
@@ -414,7 +414,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-10-31 14:31:20.727723",
+ "modified": "2025-01-01 00:09:12.998641",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "CRM",
@@ -425,7 +425,7 @@
  "quick_lists": [],
  "restrict_to_domain": "",
  "roles": [],
- "sequence_id": 26.0,
+ "sequence_id": 28.0,
  "shortcuts": [],
  "title": "CRM"
 }
