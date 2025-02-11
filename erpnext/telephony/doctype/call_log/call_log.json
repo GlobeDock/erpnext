@@ -21,6 +21,10 @@
   "duration",
   "recording_url",
   "recording_html",
+  "followup_status",
+  "missed_calls",
+  "number_of_retries",
+  "next_followup_date",
   "section_break_11",
   "type_of_call",
   "summary",
@@ -80,7 +84,7 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "Incoming\nOutgoing",
+   "options": "Incoming\nOutgoing\nOffHour\nMissedCall",
    "read_only": 1
   },
   {
@@ -158,12 +162,47 @@
    "label": "Call Received By",
    "options": "Employee",
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.status === 'NO ANSWER'",
+   "fieldname": "followup_status",
+   "fieldtype": "Select",
+   "label": "Missed Call Status",
+   "options": "Pending\nCompleted\nFailed to Reach\nNot Reachable",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.status === 'NO ANSWER' && doc.type === 'Incoming'",
+   "fieldname": "missed_calls",
+   "fieldtype": "Int",
+   "label": "Missed Calls",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.status === 'NO ANSWER'",
+   "fieldname": "number_of_retries",
+   "fieldtype": "Int",
+   "label": "Number of Retries",
+   "non_negative": 1,
+   "precision": "0",
+   "read_only": 1
+  },
+  {
+   "fieldname": "next_followup_date",
+   "fieldtype": "Datetime",
+   "label": "Next Followup Date",
+   "read_only": 1
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-01-02 23:14:05.023700",
+ "links": [
+  {
+   "link_doctype": "Followup",
+   "link_fieldname": "call_log"
+  }
+ ],
+ "modified": "2025-02-02 13:15:22.754215",
  "modified_by": "Administrator",
  "module": "Telephony",
  "name": "Call Log",

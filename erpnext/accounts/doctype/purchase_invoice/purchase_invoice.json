@@ -9,6 +9,7 @@
  "field_order": [
   "title",
   "naming_series",
+  "commission_payout",
   "supplier",
   "supplier_name",
   "tax_id",
@@ -1656,13 +1657,19 @@
    "fieldname": "column_break_vwyu",
    "fieldtype": "Column Break",
    "hidden": 1
+  },
+  {
+   "fieldname": "commission_payout",
+   "fieldtype": "Link",
+   "label": "Commission Payout",
+   "options": "Commission Payout"
   }
  ],
  "icon": "fa fa-file-text",
  "idx": 204,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-03 09:42:03.677716",
+ "modified": "2025-01-28 02:21:06.970447",
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "Purchase Invoice",

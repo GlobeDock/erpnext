@@ -100,6 +100,7 @@ class PurchaseInvoice(BuyingController):
 		buying_price_list: DF.Link | None
 		cash_bank_account: DF.Link | None
 		clearance_date: DF.Date | None
+		commission_payout: DF.Link | None
 		company: DF.Link | None
 		contact_display: DF.SmallText | None
 		contact_email: DF.SmallText | None

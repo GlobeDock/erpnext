@@ -30,15 +30,19 @@ class CallLog(Document):
 		duration: DF.Duration | None
 		employee_user_id: DF.Link | None
 		end_time: DF.Datetime | None
+		followup_status: DF.Literal["Pending", "Completed", "Failed to Reach", "Not Reachable"]
 		id: DF.Data | None
 		links: DF.Table[DynamicLink]
 		medium: DF.Data | None
+		missed_calls: DF.Int
+		next_followup_date: DF.Datetime | None
+		number_of_retries: DF.Int
 		recording_url: DF.Data | None
 		start_time: DF.Datetime | None
 		status: DF.Literal[None]
 		summary: DF.SmallText | None
 		to: DF.Data | None
-		type: DF.Literal["Incoming", "Outgoing"]
+		type: DF.Literal["Incoming", "Outgoing", "OffHour", "MissedCall"]
 		type_of_call: DF.Link | None
 	# end: auto-generated types
 
